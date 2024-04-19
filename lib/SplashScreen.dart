@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kos_app/utils/constants.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -14,25 +15,25 @@ class SplashScreen extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 150,
                 ),
                 Container(
                   child: Image.asset("assets/kos.png"),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 150,
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'screen1');
+                    Navigator.pushNamed(context, 'splash2');
                   },
                   style: TextButton.styleFrom(
-                      fixedSize: Size(266, 47),
-                      backgroundColor: Color(0xFFA26BE9),
+                      fixedSize: const Size(266, 47),
+                      backgroundColor: buttonTheme,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
                   ),
-                  child: Text(
+                  child: const Text(
                     "Get Started",
                     style: TextStyle(
                       color: Colors.black,

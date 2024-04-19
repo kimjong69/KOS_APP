@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kos_app/utils/constants.dart';
 
 class ScreenOne extends StatelessWidget {
   const ScreenOne({super.key});
@@ -22,7 +23,7 @@ class ScreenOne extends StatelessWidget {
                   height: 210,
                   child: Image.asset('assets/world.png'),
                 ),
-                Spacer(),
+                const Spacer(),
                 const SizedBox(
                   width: 277,
                   height: 39,
@@ -53,11 +54,11 @@ class ScreenOne extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'screen2');
+                    Navigator.pushNamed(context, 'signup');
                   },
                   style: TextButton.styleFrom(
-                      fixedSize: Size(305, 47),
-                      backgroundColor: Color(0xFFA26BE9),
+                      fixedSize:const Size(305, 47),
+                      backgroundColor: buttonTheme,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                   child: const Text(
@@ -70,12 +71,14 @@ class ScreenOne extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height:18,
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: Text(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'sign-in');
+                  },
+                  child: const Text(
                     'Already have an account?\nLog In',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -101,23 +104,23 @@ class ScreenOne extends StatelessWidget {
                 ),
                 TextButton.icon(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     FontAwesomeIcons.google,
                     color: Colors.black,
                   ),
-                  label: Text(
+                  label: const Text(
                     'Continue with Google',
                     style: TextStyle(color: Colors.black),
                   ),
                   style: TextButton.styleFrom(
-                    fixedSize: Size(305, 47),
-                    backgroundColor: Color(0xFFA26BE9),
+                    fixedSize: const Size(305, 47),
+                    backgroundColor: buttonTheme,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 )
               ],

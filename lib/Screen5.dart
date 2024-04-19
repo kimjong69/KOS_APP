@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kos_app/utils/constants.dart';
+import 'package:kos_app/utils/showSnackBar.dart';
 
 class ScreenFive extends StatefulWidget {
   const ScreenFive({super.key});
@@ -8,6 +12,21 @@ class ScreenFive extends StatefulWidget {
 }
 
 class _ScreenFiveState extends State<ScreenFive> {
+  final TextEditingController jobTypeController = TextEditingController();
+  final TextEditingController domainController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController salaryController = TextEditingController();
+  final currentUser = FirebaseAuth.instance.currentUser!;
+
+  @override
+  void dispose() {
+    super.dispose();
+    jobTypeController.dispose();
+    domainController.dispose();
+    cityController.dispose();
+    salaryController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -15,7 +34,7 @@ class _ScreenFiveState extends State<ScreenFive> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height*0.9,
+          height: MediaQuery.of(context).size.height * 0.9,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -24,7 +43,7 @@ class _ScreenFiveState extends State<ScreenFive> {
                 children: [
                   TextButton(
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       'Need Help?',
                       style: TextStyle(
                         color: Colors.black,
@@ -32,7 +51,7 @@ class _ScreenFiveState extends State<ScreenFive> {
                       ),
                     ),
                   ),
-                  Text(
+                  const Text(
                     'You are looking for?',
                     style: TextStyle(
                       color: Colors.black,
@@ -41,87 +60,107 @@ class _ScreenFiveState extends State<ScreenFive> {
                       fontFamily: 'Inter',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Job Type',
                     style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     width: 350,
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: jobTypeController,
                       decoration: InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                           filled: true,
                           fillColor: Colors.grey[700],
                           hintText: 'e.g.Full Time'),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Domain or Expertise',
                     style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     width: 350,
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: domainController,
                       decoration: InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                           filled: true,
                           fillColor: Colors.grey[700],
                           hintText: 'e.g.IT-Mobile App-Flutter'),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Preferred City',
                     style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     width: 350,
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: cityController,
                       decoration: InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                           filled: true,
                           fillColor: Colors.grey[700],
                           hintText: 'e.g.Mumbai'),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Expected Salary',
                     style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     width: 350,
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: salaryController,
                       decoration: InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                           filled: true,
                           fillColor: Colors.grey[700],
                           hintText: 'e.g.4lpa-5lpa'),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   SizedBox(
                     width: 350,
                     child: Row(
@@ -130,27 +169,42 @@ class _ScreenFiveState extends State<ScreenFive> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text('Back',style: TextStyle(color: Colors.black),),
                           style: TextButton.styleFrom(
-                            fixedSize: Size(111, 28),
-                            backgroundColor: Colors.grey,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)
-                            )
+                              fixedSize: const Size(111, 28),
+                              backgroundColor: Colors.grey,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                          child: const Text(
+                            'Back',
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'screen6');
+                          onPressed: () async {
+                            try {
+                              await FirebaseFirestore.instance
+                                  .collection('Users')
+                                  .doc(currentUser.email)
+                                  .update({
+                                'Job Type': jobTypeController.text,
+                                'Domain and Expertise': domainController.text,
+                                'Preferred City': cityController.text,
+                                'Expected Salary': salaryController.text,
+                              });
+                              Navigator.pushNamed(context, 'personal-details');
+                            } on FirebaseException catch(e) {
+                              showSnackBar(context, e.message!);
+                            }
                           },
-                          child: Text('Save & Next',style: TextStyle(color: Colors.black),),
                           style: TextButton.styleFrom(
-                              fixedSize: Size(111, 28),
-                              backgroundColor: Color(0xFFA26BE9),
+                              fixedSize: const Size(111, 28),
+                              backgroundColor: buttonTheme,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)
-                              )
+                                  borderRadius: BorderRadius.circular(20))),
+                          child: const Text(
+                            'Save & Next',
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ],

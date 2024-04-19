@@ -1,7 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kos_app/utils/constants.dart';
+import 'package:kos_app/utils/showSnackBar.dart';
 
-class ScreenTwo extends StatelessWidget {
+class ScreenTwo extends StatefulWidget {
   const ScreenTwo({super.key});
+
+  @override
+  State<ScreenTwo> createState() => _ScreenTwoState();
+}
+
+class _ScreenTwoState extends State<ScreenTwo> {
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -12,20 +23,33 @@ class ScreenTwo extends StatelessWidget {
         children: [
           Column(
             children: [
-              SizedBox(height: 122),
-              CircleAvatar(radius:60, foregroundImage: AssetImage('assets/Business1.png'),backgroundColor: Color(0xFFD9D9D9),),
-              SizedBox(height: 50.59,),
+              const SizedBox(height: 122),
+              const CircleAvatar(radius:60, foregroundImage: AssetImage('assets/Business1.png'),backgroundColor: Color(0xFFD9D9D9),),
+              const SizedBox(height: 50.59,),
               TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'screen3');
+                onPressed: () async {
+                  try {
+                    await FirebaseFirestore.instance
+                        .collection('Users')
+                        .doc(currentUser.email!)
+                        .set(
+                      {
+                        'Profession': 'Entrepreneur',
+                      },
+                    );
+
+                  } on FirebaseException catch (e) {
+                    showSnackBar(context, e.message!);
+                  }
+                  Navigator.pushNamed(context, 'hire-talent-screen');
                 },
                 style: TextButton.styleFrom(
-                    fixedSize: Size(305, 47),
-                    backgroundColor: Color(0xFFA26BE9),
+                    fixedSize: const Size(305, 47),
+                    backgroundColor: buttonTheme,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
                 child: const Text(
-                  "I'm an Enterpreneur",
+                  "I'm an Entrepreneur",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 25,
@@ -34,14 +58,29 @@ class ScreenTwo extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
-              CircleAvatar(radius:60, foregroundImage: AssetImage('assets/business2.png'),backgroundColor: Color(0xFFD9D9D9),),
-              SizedBox(height: 50.59,),
+              const Spacer(),
+              const CircleAvatar(radius:60, foregroundImage: AssetImage('assets/business2.png'),backgroundColor: Color(0xFFD9D9D9),),
+              const SizedBox(height: 50.59,),
               TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    await FirebaseFirestore.instance
+                        .collection('Users')
+                        .doc(currentUser.email!)
+                        .set(
+                      {
+                        'Profession': 'Professional',
+                      },
+                    );
+
+                  } on FirebaseException catch (e) {
+                    showSnackBar(context, e.message!);
+                  }
+                  Navigator.pushNamed(context, 'preference-screen');
+                },
                 style: TextButton.styleFrom(
-                    fixedSize: Size(305, 47),
-                    backgroundColor: Color(0xFFA26BE9),
+                    fixedSize: const Size(305, 47),
+                    backgroundColor: buttonTheme,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
                 child: const Text(
@@ -54,7 +93,7 @@ class ScreenTwo extends StatelessWidget {
                   ),
                 ),
               ),
-            SizedBox(height: 122,)
+            const SizedBox(height: 122,)
             ],
           ),
         ],

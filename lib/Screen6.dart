@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kos_app/reusable_card.dart';
+import 'package:kos_app/utils/constants.dart';
+import 'package:kos_app/utils/showSnackBar.dart';
 
 enum Gender { male, female }
+
 enum Experience { experienced, fresher }
 
 class ScreenSix extends StatefulWidget {
@@ -14,6 +19,20 @@ class ScreenSix extends StatefulWidget {
 class _ScreenSixState extends State<ScreenSix> {
   Gender? selectedGender;
   Experience? selectedExperience;
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
+  final currentUser = FirebaseAuth.instance.currentUser!;
+
+  @override
+  void dispose(){
+    super.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    phoneController.dispose();
+    dobController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +41,9 @@ class _ScreenSixState extends State<ScreenSix> {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height*0.9,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 InkWell(
@@ -33,16 +51,16 @@ class _ScreenSixState extends State<ScreenSix> {
                   child: Column(
                     children: [
                       Container(
-                        child: Image.asset('assets/camera.png'),
                         width: 80,
                         height: 80,
-                        decoration: ShapeDecoration(
+                        decoration: const ShapeDecoration(
                           color: Colors.black,
                           shape: OvalBorder(),
                         ),
                         alignment: Alignment.center,
+                        child: Image.asset('assets/camera.png'),
                       ),
-                      Text(
+                      const Text(
                         'Upload',
                         style: TextStyle(
                             color: Colors.black,
@@ -52,16 +70,16 @@ class _ScreenSixState extends State<ScreenSix> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Divider(
+                const Divider(
                   color: Colors.black,
                   indent: 20,
                   endIndent: 20,
                   thickness: 2,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Column(
@@ -69,7 +87,7 @@ class _ScreenSixState extends State<ScreenSix> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
+                        const Text(
                           'My Gender',
                           style: TextStyle(
                               color: Colors.black,
@@ -79,38 +97,48 @@ class _ScreenSixState extends State<ScreenSix> {
                         Row(
                           children: [
                             ReusableCard(
-                              onPress: (){
+                              onPress: () {
                                 setState(() {
                                   selectedGender = Gender.male;
                                 });
                               },
-                              cardChild: Text('Male',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),),
+                              cardChild: const Text(
+                                'Male',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              ),
                               colour: selectedGender == Gender.male
-                                  ? Color(0xFFA26BE9)
+                                  ? buttonTheme
                                   : Colors.grey,
                             ),
                             ReusableCard(
-                              onPress: (){
+                              onPress: () {
                                 setState(() {
                                   selectedGender = Gender.female;
                                 });
                               },
-                              cardChild: Text('Female',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),),
+                              cardChild: const Text(
+                                'Female',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              ),
                               colour: selectedGender == Gender.female
-                                  ? Color(0xFFA26BE9)
+                                  ? buttonTheme
                                   : Colors.grey,
                             ),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
+                        const Text(
                           'I Am           ',
                           style: TextStyle(
                               color: Colors.black,
@@ -120,25 +148,36 @@ class _ScreenSixState extends State<ScreenSix> {
                         Row(
                           children: [
                             ReusableCard(
-                              onPress: (){
+                              onPress: () {
                                 setState(() {
                                   selectedExperience = Experience.experienced;
                                 });
                               },
-                              cardChild: Text('Experienced',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),),
-                              colour: selectedExperience == Experience.experienced
-                                  ? Color(0xFFA26BE9)
-                                  : Colors.grey,
+                              cardChild: const Text(
+                                'Experienced',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              colour:
+                                  selectedExperience == Experience.experienced
+                                      ? buttonTheme
+                                      : Colors.grey,
                             ),
                             ReusableCard(
-                              onPress: (){
+                              onPress: () {
                                 setState(() {
                                   selectedExperience = Experience.fresher;
                                 });
                               },
-                              cardChild: Text('Fresher',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),),
+                              cardChild: const Text(
+                                'Fresher',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              ),
                               colour: selectedExperience == Experience.fresher
-                                  ? Color(0xFFA26BE9)
+                                  ? buttonTheme
                                   : Colors.grey,
                             ),
                           ],
@@ -147,102 +186,124 @@ class _ScreenSixState extends State<ScreenSix> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Divider(
+                const Divider(
                   color: Colors.black,
                   indent: 20,
                   endIndent: 20,
                   thickness: 2,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'First Name',
                       style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     SizedBox(
                       width: 350,
                       child: TextField(
+                        textCapitalization: TextCapitalization.sentences,
+                        controller: firstNameController,
                         decoration: InputDecoration(
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                             filled: true,
                             fillColor: Colors.grey[700],
                             hintText: 'e.g.Raj'),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Last Name',
                       style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     SizedBox(
                       width: 350,
                       child: TextField(
+                        textCapitalization: TextCapitalization.sentences,
+                        controller: lastNameController,
                         decoration: InputDecoration(
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                             filled: true,
                             fillColor: Colors.grey[700],
                             hintText: 'e.g.Sharma'),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Email Address',
+                    const Text(
+                      'Phone Number',
                       style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     SizedBox(
                       width: 350,
                       child: TextField(
-                        keyboardType: TextInputType.emailAddress,
+                        textCapitalization: TextCapitalization.sentences,
+                        controller: phoneController,
+                        keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                             filled: true,
                             fillColor: Colors.grey[700],
-                            hintText: 'e.g.sharma@gmail.com'),
+                            hintText: 'e.g. +91 1234567890'),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Date of Birth',
                       style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     SizedBox(
                       width: 350,
                       child: TextField(
+                        textCapitalization: TextCapitalization.sentences,
+                        controller: dobController,
                         decoration: InputDecoration(
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                             filled: true,
                             fillColor: Colors.grey[700],
-                            hintText: 'e.g.may 1999'),
+                            hintText: 'e.g.28 May 1999'),
                       ),
                     ),
                   ],
                 ),
-                Spacer(),
+                const SizedBox(
+                  height: 30,
+                ),
                 SizedBox(
                   width: 350,
                   child: Row(
@@ -251,27 +312,46 @@ class _ScreenSixState extends State<ScreenSix> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text('Back',style: TextStyle(color: Colors.black),),
                         style: TextButton.styleFrom(
-                            fixedSize: Size(111, 28),
+                            fixedSize: const Size(111, 28),
                             backgroundColor: Colors.grey,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)
-                            )
+                                borderRadius: BorderRadius.circular(20))),
+                        child: const Text(
+                          'Back',
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'screen7');
+                        onPressed: () async {
+                          try {
+                            await FirebaseFirestore.instance
+                                .collection('Users')
+                                .doc(currentUser.email!)
+                                .update(
+                              {
+                                'Gender': selectedGender.toString().split('.')[1],
+                                'Experience': selectedExperience.toString().split('.')[1],
+                                'First Name': firstNameController.text,
+                                'Last Name': lastNameController.text,
+                                'Phone Number': phoneController.text,
+                                'DOB': dobController.text,
+                              },
+                            );
+                            Navigator.pushNamed(context, 'edu-details');
+                          } on FirebaseException catch (e) {
+                            showSnackBar(context, e.message!);
+                          }
                         },
-                        child: Text('Save & Next',style: TextStyle(color: Colors.black),),
                         style: TextButton.styleFrom(
-                            fixedSize: Size(111, 28),
-                            backgroundColor: Color(0xFFA26BE9),
+                            fixedSize: const Size(111, 28),
+                            backgroundColor: buttonTheme,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)
-                            )
+                                borderRadius: BorderRadius.circular(20))),
+                        child: const Text(
+                          'Save & Next',
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ],

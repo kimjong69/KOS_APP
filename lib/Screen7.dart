@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kos_app/utils/constants.dart';
+import 'package:kos_app/utils/showSnackBar.dart';
 
 class ScreenSeven extends StatefulWidget {
   const ScreenSeven({super.key});
@@ -8,6 +12,21 @@ class ScreenSeven extends StatefulWidget {
 }
 
 class _ScreenSevenState extends State<ScreenSeven> {
+  final TextEditingController instituteController=TextEditingController();
+  final TextEditingController eduLevelController=TextEditingController();
+  final TextEditingController addYearController=TextEditingController();
+  final TextEditingController passYearController=TextEditingController();
+  final currentUser = FirebaseAuth.instance.currentUser!;
+
+  @override
+  void dispose(){
+    super.dispose();
+    instituteController.dispose();
+    eduLevelController.dispose();
+    addYearController.dispose();
+    passYearController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,66 +38,66 @@ class _ScreenSevenState extends State<ScreenSeven> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: Text(
+                        width: 40,
+                        height: 40,
+                        decoration: ShapeDecoration(
+                          color: Colors.yellow[600],
+                          shape: const OvalBorder(),
+                        ),
+                        alignment: Alignment.center,
+                        child:const Text(
                           '0',
                           style: TextStyle(color: Colors.black),
                         ),
-                        width: 40,
-                        height: 40,
-                        decoration: ShapeDecoration(
-                          color: Colors.yellow[600],
-                          shape: OvalBorder(),
-                        ),
-                        alignment: Alignment.center,
                       ),
                       Container(
                         child: Image.asset('assets/arrow.png'),
                       ),
                       Container(
-                        child: Text(
+                        width: 40,
+                        height: 40,
+                        decoration: ShapeDecoration(
+                          color: Colors.yellow[600],
+                          shape: const OvalBorder(),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
                           '50',
                           style: TextStyle(color: Colors.black),
                         ),
-                        width: 40,
-                        height: 40,
-                        decoration: ShapeDecoration(
-                          color: Colors.yellow[600],
-                          shape: OvalBorder(),
-                        ),
-                        alignment: Alignment.center,
                       ),
                       Container(
                         child: Image.asset('assets/arrow.png'),
                       ),
                       Container(
-                        child: Text(
-                          '100',
-                          style: TextStyle(color: Colors.black),
-                        ),
                         width: 40,
                         height: 40,
                         decoration: ShapeDecoration(
                           color: Colors.yellow[600],
-                          shape: OvalBorder(),
+                          shape: const OvalBorder(),
                         ),
                         alignment: Alignment.center,
+                        child: const Text(
+                          '100',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Qualification Details',
                         style: TextStyle(
                           color: Colors.black,
@@ -87,82 +106,94 @@ class _ScreenSevenState extends State<ScreenSeven> {
                           fontFamily: 'Inter',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
-                      Text(
+                      const Text(
                         'Institute Name',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         width: 350,
                         child: TextField(
+                          textCapitalization: TextCapitalization.sentences,
+                          controller: instituteController,
                           decoration: InputDecoration(
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                               filled: true,
                               fillColor: Colors.grey[700],
                               hintText: 'e.g.Mumbai University'),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         'Education Level & Degree',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         width: 350,
                         child: TextField(
+                          textCapitalization: TextCapitalization.sentences,
+                          controller: eduLevelController,
                           decoration: InputDecoration(
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                               filled: true,
                               fillColor: Colors.grey[700],
                               hintText: 'e.g.Graduation -B.Tech'),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         'Admission Year',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         width: 350,
                         child: TextField(
+                          textCapitalization: TextCapitalization.sentences,
+                          controller: addYearController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                               filled: true,
                               fillColor: Colors.grey[700],
                               hintText: 'e.g.2017'),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         'Passout Year',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w700, fontSize: 15),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         width: 350,
                         child: TextField(
+                          textCapitalization: TextCapitalization.sentences,
+                          controller: passYearController,
                           decoration: InputDecoration(
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                               filled: true,
                               fillColor: Colors.grey[700],
                               hintText: 'e.g.2021'),
@@ -171,7 +202,7 @@ class _ScreenSevenState extends State<ScreenSeven> {
 
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   SizedBox(
                     width: 350,
                     child: Row(
@@ -180,28 +211,38 @@ class _ScreenSevenState extends State<ScreenSeven> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text('Back',style: TextStyle(color: Colors.black),),
                           style: TextButton.styleFrom(
-                              fixedSize: Size(111, 28),
+                              fixedSize: const Size(111, 28),
                               backgroundColor: Colors.grey,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)
                               )
                           ),
+                          child: const Text('Back',style: TextStyle(color: Colors.black),),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'screen8');
+                          onPressed: () async {
+                            try{
+                              await FirebaseFirestore.instance.collection('Users').doc(currentUser.email!).update({
+                                'Institute Name': instituteController.text,
+                                'Education Level':eduLevelController.text,
+                                'Admission Year': addYearController.text,
+                                'Passout Year': passYearController.text,
+                              });
+                              Navigator.pushNamed(context, 'prof-profile');
+                            }on FirebaseException catch (e){
+                              showSnackBar(context, e.message!);
+                            }
                           },
-                          child: Text('Save & Next',style: TextStyle(color: Colors.black),),
                           style: TextButton.styleFrom(
-                              fixedSize: Size(111, 28),
-                              backgroundColor: Color(0xFFA26BE9),
+                              fixedSize: const Size(111, 28),
+                              backgroundColor: buttonTheme,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)
                               )
                           ),
+                          child: const Text('Save & Next',style: TextStyle(color: Colors.black),),
                         ),
                       ],
                     ),

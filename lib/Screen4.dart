@@ -19,7 +19,7 @@ class _ScreenFourState extends State<ScreenFour> {
           children: [
             Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 250,
                 ),
                 Container(
@@ -36,7 +36,7 @@ class _ScreenFourState extends State<ScreenFour> {
                          height: 68,
                           width: 40,
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.black))),
@@ -58,7 +58,7 @@ class _ScreenFourState extends State<ScreenFour> {
                           height: 68,
                           width: 40,
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.black))),
@@ -80,7 +80,7 @@ class _ScreenFourState extends State<ScreenFour> {
                           height: 68,
                           width: 40,
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.black))),
@@ -102,7 +102,7 @@ class _ScreenFourState extends State<ScreenFour> {
                           height: 68,
                           width: 40,
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.black))),
@@ -124,7 +124,7 @@ class _ScreenFourState extends State<ScreenFour> {
                           height: 68,
                           width: 40,
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
                                     BorderSide(color: Colors.black))),
@@ -146,7 +146,7 @@ class _ScreenFourState extends State<ScreenFour> {
                           height: 68,
                           width: 40,
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
                                     BorderSide(color: Colors.black))),
@@ -171,12 +171,12 @@ class _ScreenFourState extends State<ScreenFour> {
                 TextButton(
                   onPressed: () {
                   },
-                  child: Text(
+                  child: const Text(
                     'Resend Code',
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 TextButton(
@@ -184,8 +184,8 @@ class _ScreenFourState extends State<ScreenFour> {
                     Navigator.pushNamed(context, 'screen5');
                     },
                   style: TextButton.styleFrom(
-                      fixedSize: Size(305, 47),
-                      backgroundColor: Color(0xFFA26BE9),
+                      fixedSize: const Size(305, 47),
+                      backgroundColor: const Color(0xFFA26BE9),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                   child: const Text(
