@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:kos_app/Screen6.dart';
 import 'package:kos_app/Screen7.dart';
 import 'package:kos_app/Screen8.dart';
 import 'package:kos_app/SplashScreen.dart';
+import 'package:kos_app/chat_users_view.dart';
 import 'package:kos_app/entre_perso_details.dart';
 import 'package:kos_app/hire_talent_screen.dart';
 import 'package:kos_app/job_view.dart';
@@ -26,8 +28,8 @@ void main()async{
        );
   runApp(
     MaterialApp(
-      home: const HomePage(),
-      // initialRoute: 'signup',
+      // home: const HomePage(),
+      initialRoute: 'chat-users-list',
       debugShowCheckedModeBanner: false,
       title: 'KOS',
       theme: ThemeData.dark(),
@@ -48,38 +50,39 @@ void main()async{
         'hire-talent-screen':(context)=>const Hire_Talent(),
         'entre-perso-details':(context)=> const CompanyDetails(),
         'repre-details':(context)=> const RepresentativeDetails(),
+        'chat-users-list':(context)=> const ChatUsersView(),
       },
     ),
   );
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context){
-    return FutureBuilder(
-      future:Firebase.initializeApp(
-        options:DefaultFirebaseOptions.currentPlatform
-      ),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.done:
-            final user = FirebaseAuth.instance.currentUser;
-            if (user != null) {
-              if (user.emailVerified) {
-                return const ScreenEight();
-              } else {
-                return const VerifyEmailView();
-              }
-            } else {
-              return const SplashScreen();
-            }
-
-          default:
-            return const CircularProgressIndicator();
-        }
-      },
-    );
-  }
-}
+// class HomePage extends StatelessWidget {
+//   const HomePage({super.key});
+//
+//   @override
+//   Widget build(BuildContext context){
+//     return FutureBuilder(
+//       future:Firebase.initializeApp(
+//         options:DefaultFirebaseOptions.currentPlatform
+//       ),
+//       builder: (context, snapshot) {
+//         switch (snapshot.connectionState) {
+//           case ConnectionState.done:
+//             final user = FirebaseAuth.instance.currentUser;
+//             if (user != null) {
+//               if (user.emailVerified) {
+//                 return const ScreenEight();
+//               } else {
+//                 return const VerifyEmailView();
+//               }
+//             } else {
+//               return const SplashScreen();
+//             }
+//
+//           default:
+//             return const CircularProgressIndicator();
+//         }
+//       },
+//     );
+//   }
+// }

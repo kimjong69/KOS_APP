@@ -32,7 +32,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
                     await FirebaseFirestore.instance
                         .collection('Users')
                         .doc(currentUser.email!)
-                        .set(
+                        .update(
                       {
                         'Profession': 'Entrepreneur',
                       },
@@ -67,7 +67,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
                     await FirebaseFirestore.instance
                         .collection('Users')
                         .doc(currentUser.email!)
-                        .set(
+                        .update(
                       {
                         'Profession': 'Professional',
                       },
