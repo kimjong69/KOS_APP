@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kos_app/Screen8.dart';
-import 'package:kos_app/chat_users_view.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
