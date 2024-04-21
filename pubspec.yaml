@@ -22,6 +22,8 @@ dependencies:
   firebase_core: ^2.25.5
   firebase_auth: ^4.17.6
   cloud_firestore: ^4.17.0
+  persistent_bottom_nav_bar: ^5.0.2
+  firebase_messaging: ^14.8.2
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +57,10 @@ flutter:
      - assets/business2.png
      - assets/camera.png
      - assets/arrow.png
+     - assets/abc.jpg
+     - assets/def.jpg
+     - assets/ghi.jpg
+     - assets/xyz.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

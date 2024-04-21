@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kos_app/services/firebase_auth_methods.dart';
+import 'package:kos_app/utils/botton_navbar.dart';
 import 'package:kos_app/utils/constants.dart';
 
 class ScreenEight extends StatefulWidget {
@@ -20,32 +21,7 @@ class _ScreenEightState extends State<ScreenEight> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            bottomNavigationBar: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.white,
-                items: const [
-                  BottomNavigationBarItem(
-                      icon: FaIcon(
-                        FontAwesomeIcons.bell,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      label: ''),
-                  BottomNavigationBarItem(
-                      icon: FaIcon(
-                        FontAwesomeIcons.message,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      label: ''),
-                  BottomNavigationBarItem(
-                      icon: FaIcon(
-                        FontAwesomeIcons.user,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      label: ''),
-                ]),
+            bottomNavigationBar: const BottomNavBar(),
             backgroundColor: Colors.white,
             body: StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
@@ -121,9 +97,11 @@ class _ScreenEightState extends State<ScreenEight> {
                                                 TextButton(
                                                   onPressed: () {},
                                                   style: TextButton.styleFrom(
-                                                      fixedSize: const Size(63, 18),
+                                                      fixedSize:
+                                                          const Size(63, 18),
                                                       backgroundColor:
-                                                          const Color(0xFF3DBFF7),
+                                                          const Color(
+                                                              0xFF3DBFF7),
                                                       shape:
                                                           RoundedRectangleBorder(
                                                               borderRadius:
@@ -146,9 +124,11 @@ class _ScreenEightState extends State<ScreenEight> {
                                                 TextButton(
                                                   onPressed: () {},
                                                   style: TextButton.styleFrom(
-                                                      fixedSize: const Size(63, 18),
+                                                      fixedSize:
+                                                          const Size(63, 18),
                                                       backgroundColor:
-                                                          const Color(0xFF3DBFF7),
+                                                          const Color(
+                                                              0xFF3DBFF7),
                                                       shape:
                                                           RoundedRectangleBorder(
                                                               borderRadius:
@@ -180,7 +160,9 @@ class _ScreenEightState extends State<ScreenEight> {
                             ),
                             InkWell(
                               onTap: () {
-                                userData["Profession"]=="Professional"?Navigator.pushNamed(context, 'job-view'):null;
+                                userData["Profession"] == "Professional"
+                                    ? Navigator.pushNamed(context, 'job-view')
+                                    : null;
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
@@ -190,21 +172,24 @@ class _ScreenEightState extends State<ScreenEight> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 20, top: 10, bottom: 10),
-                                    child: userData["Profession"]=="Professional"?const Text(
-                                      'Jobs',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ):const Text(
-                                      'Hiring Talent',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
+                                    child:
+                                        userData["Profession"] == "Professional"
+                                            ? const Text(
+                                                'Jobs',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              )
+                                            : const Text(
+                                                'Hiring Talent',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
                                   ),
                                 ),
                               ),
@@ -242,58 +227,71 @@ class _ScreenEightState extends State<ScreenEight> {
                                         ),
                                       ),
                                       InkWell(
-                                        child: userData["Profession"]=="Professional"?const Text(
-                                          'Upload Resume',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ):const Text(
-                                          'Your Startup Idea',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
+                                        child: userData["Profession"] ==
+                                                "Professional"
+                                            ? const Text(
+                                                'Upload Resume',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              )
+                                            : const Text(
+                                                'Your Startup Idea',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          userData["Profession"]=="Professional"?null:Navigator.pushNamed(context, 'schemes-view');
+                                          userData["Profession"] ==
+                                                  "Professional"
+                                              ? null
+                                              : Navigator.pushNamed(
+                                                  context, 'schemes-view');
                                         },
-                                        child: userData["Profession"]=="Professional"?const Text(
-                                          'Appointment Bookings',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ):const Text(
-                                      'Government Schemes',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                              ),
+                                        child: userData["Profession"] ==
+                                                "Professional"
+                                            ? const Text(
+                                                'Appointment Bookings',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              )
+                                            : const Text(
+                                                'Government Schemes',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
                                       ),
                                       InkWell(
-                                        child: userData["Profession"]=="Professional"?const Text(
-                                          'Skills Assesment',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ):const Text(
-                                          'Current Policies',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
+                                        child: userData["Profession"] ==
+                                                "Professional"
+                                            ? const Text(
+                                                'Skills Assesment',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              )
+                                            : const Text(
+                                                'Current Policies',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
                                       ),
                                       const InkWell(
                                         child: Text('Contact Us',
@@ -338,8 +336,9 @@ class _ScreenEightState extends State<ScreenEight> {
                               height: 10,
                             ),
                             TextButton(
-                              onPressed: (){
-                                FirebaseAuthMethods(FirebaseAuth.instance).logOut(context);
+                              onPressed: () {
+                                FirebaseAuthMethods(FirebaseAuth.instance)
+                                    .logOut(context);
                                 Navigator.pushNamed(context, 'sign-in');
                               },
                               style: TextButton.styleFrom(
@@ -369,3 +368,4 @@ class _ScreenEightState extends State<ScreenEight> {
             )));
   }
 }
+

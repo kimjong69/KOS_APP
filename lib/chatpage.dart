@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kos_app/services/chat_service.dart';
+import 'package:kos_app/utils/botton_navbar.dart';
 import 'package:kos_app/utils/chat_bubble.dart';
+import 'package:kos_app/utils/constants.dart';
 
 class ChatPage extends StatefulWidget {
   final String receiverUserEmail;
@@ -34,16 +36,21 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(widget.receiverUserEmail),
+        backgroundColor: buttonTheme,
+        title: Text(widget.receiverUserEmail.split('@')[0]),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child:_buildMessageList(),
-          ),
-          _buildMessageInput(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: _buildMessageList(),
+            ),
+            _buildMessageInput(),
+          ],
+        ),
       ),
     );
   }
@@ -60,7 +67,8 @@ class _ChatPageState extends State<ChatPage> {
           return const Text('Loading..');
         }
         return ListView(
-          children: snapshot.data!.docs
+          reverse: true,
+          children: snapshot.data!.docs.reversed
               .map((document) => _buildMessageItem(document))
               .toList(),
         );
@@ -78,11 +86,18 @@ class _ChatPageState extends State<ChatPage> {
     return Container(
       alignment: alignment,
       child: Column(
-        crossAxisAlignment: (data['senderID'] == _firebaseAuth.currentUser!.uid)? CrossAxisAlignment.end:CrossAxisAlignment.start,
-        mainAxisAlignment: (data['senderID'] == _firebaseAuth.currentUser!.uid)? MainAxisAlignment.end:MainAxisAlignment.start,
+        crossAxisAlignment: (data['senderID'] == _firebaseAuth.currentUser!.uid)
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
+        mainAxisAlignment: (data['senderID'] == _firebaseAuth.currentUser!.uid)
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         children: [
-          Text(data['senderEmail']),
-          ChatBubble(message: data['message']),
+          Text(
+            data['senderEmail'],
+            style: const TextStyle(color: Colors.black),
+          ),
+          ChatBubble(message: data['message'],alignment: alignment,),
         ],
       ),
     );
@@ -93,13 +108,19 @@ class _ChatPageState extends State<ChatPage> {
       children: [
         Expanded(
             child: TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+                  filled: true,
+                  fillColor: Colors.grey,
+                  hintText: 'Enter Message'),
           controller: _messageController,
           obscureText: false,
         )),
         IconButton(
             onPressed: sendMessage,
             icon: const Icon(
-              Icons.arrow_upward,
+              color: buttonTheme,
+              Icons.send,
               size: 40,
             ))
       ],
